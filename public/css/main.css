@@ -1,0 +1,166 @@
+body {
+        font-family: "Source Sans Pro", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url(../background.jpg);
+        background-position: center;
+	background-size: cover;
+	background-repeat: inherit;
+
+        }
+
+.headsection {
+	background-color: teal;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	display: block;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	position: fixed;
+	color: cornsilk;
+	}
+
+input.ChatAttachment {
+	width:.1px;
+	height:.1px;
+	opacity:0;
+	overflow:hidden;
+	position:absolute;
+	z-index:-1
+	}
+
+.ChatAttachment+label {
+	cursor:pointer;
+	display:inline-block;
+	background-color:#fff;
+	left:3%;
+	border-top-left-radius: 50px;
+	border-bottom-left-radius: 50px;
+	padding-right: 100px;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	}
+
+.ChatAttachment+label,input.ChatInput {
+	height:25px;
+	/*border-radius:5px;*/
+	border:none;
+	/*padding:10px; */
+	bottom: 15px;
+	position: fixed;
+	}
+
+input.ChatInput {
+	width:90vw;
+	left: 7%;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	}
+
+.btn {
+	display:block;
+	padding: 10px;
+    	border-radius: 10px;
+    	margin: 5px;
+    	min-width: 100px;
+    	background-color: #00000033;
+    	cursor: pointer;
+	}
+
+ul.ChatLog {
+	list-style:none;
+	padding-left: 0px;
+	bottom: 0;
+	position: fixed;
+	left: 0;
+	overflow: auto;
+	display: block;
+	top: 70px;
+	bottom: 70px;
+	right: 0;
+	}
+
+.ChatLog {
+	/*max-width:20em;*/
+	margin:0 auto
+	}
+
+.ChatLog .ChatLog__entry {
+	margin:.5em
+	}
+
+.ChatLog__entry {
+	display:flex;
+	flex-direction:row;
+	align-items:flex-end;
+	max-width:100%
+	}
+
+.ChatLog__entry.ChatLog__entry_mine {
+	flex-direction:row-reverse
+	}
+
+.ChatLog__avatar {
+	flex-shrink:0;
+	flex-grow:0;
+	z-index:1;
+	height:50px;
+	width:50px;
+	border-radius:25px
+	}
+
+.ChatLog__entry.ChatLog__entry_mine .ChatLog__avatar {
+	display:none
+	}
+
+.ChatLog__entry .ChatLog__message {
+	position:relative;
+	margin:0 12px;
+	border-bottom-left-radius: 0;
+	}
+
+.ChatLog__entry .ChatLog__message__image {
+	max-width:100%
+	}
+
+.ChatLog__entry .ChatLog__message:before {
+	position:absolute;
+	right:auto;
+	bottom:.6em;
+	left:-12px;
+	height:0;
+	content:\"\";
+	border:6px solid transparent;
+	border-right-color:#ddd;
+	z-index:2
+	}
+
+.ChatLog__entry.ChatLog__entry_mine .ChatLog__message:before {
+	right:-12px;
+	bottom:.6em;
+	left:auto;
+	border:6px solid transparent;
+	border-left-color:#08f
+	}
+
+.ChatLog__message {
+	background-color:#ddd;
+	padding:.5em;
+	border-radius:10px;
+	font-weight:lighter;
+	max-width:70%;
+	}
+
+.ChatLog__entry.ChatLog__entry_mine .ChatLog__message {
+	border-top: 1px solid teal;
+	border-bottom: 1px solid teal;
+	background-color: teal;
+	color: #fff;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 10px !important;
+}
