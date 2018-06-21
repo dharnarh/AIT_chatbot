@@ -46,13 +46,13 @@ $botman->hears('Google - {google}', function ($bot, $google) {
 
 	$lists = json_decode($data);
 
-	$title1 = $lists->items[0]->title;
-	$link1 = $lists->items[0]->link;
-	$displayLink1 = $lists->items[0]->displayLink;
-	$snippet1 = $lists->items[0]->snippet;
+	$title1 = $lists->items[0]->title . "\n";
+	$link1 = $lists->items[0]->link . "\n";
+	$displayLink1 = $lists->items[0]->displayLink . "\n";
+	$snippet1 = $lists->items[0]->snippet . "\n";
 
-	$bot->reply($title1);
+	$bot->reply($title1 );
 
 });
 
-$botman->hears('/function', BotManController::class.'@startConversation');
+$botman->hears('/start', BotManController::class.'@startConversation');
