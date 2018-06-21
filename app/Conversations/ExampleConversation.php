@@ -19,19 +19,18 @@ class ExampleConversation extends Conversation
             ->fallback('Unable to ask question')
             ->callbackId('ask_reason')
             ->addButtons([
-                Button::create('Tell a joke')->value('joke'),
                 Button::create('Give me a fancy quote')->value('quote'),
-                Button::create('Google')->value('google'),
-                Button::create('Dictionary')->value('dic'),
+                Button::create('Solve math')->value('maths'),
+                Button::create('Direction')->value('direction'),
+                Button::create('')->value(''),
             ]);
 
         return $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                if ($answer->getValue() === 'joke') {
-                    $joke = json_decode(file_get_contents('http://api.icndb.com/jokes/random'));
-                    $this->say($joke->value->joke);
-                } else {
+                if ($answer->getValue() === 'quote') {
                     $this->say(Inspiring::quote());
+                } else {
+                    
                 }
             }
         });
