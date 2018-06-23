@@ -1,8 +1,27 @@
 <?php
 use App\Http\Controllers\BotManController;
+use BotMan\BotMan\Middleware\ApiAi;
 
 $botman = resolve('botman');
 
+$dialogflow = ApiAi::create('9794b3192ae84387b8a34b535c1e1205')->listenForAction();
+
+//Apply global "received" middleware
+
+$botman->middleware->received($dialogflow);
+
+$botman->hears('.*', function ($bot) {
+
+	$extras = $bot->getMessage()->getExtras();
+	$apiReply = $extras['apiReply'];
+	$apiAction = $extras['apiAction'];
+	$apiIntent = $extras['apiIntent'];
+
+	$bot->reply($apiReply);
+
+})->middleware($dialogflow);
+
+/*
 $botman->hears('Hi|Hello|Hey', function ($bot) {
     $bot->reply('Hello there, I am a chatbot that offers few functionality for now');
     $bot->ask('What is your name?', function ($name, $bot) {
@@ -56,3 +75,6 @@ $botman->hears('Google - {google}', function ($bot, $google) {
 });
 
 $botman->hears('/start', BotManController::class.'@startConversation');
+
+
+*/
