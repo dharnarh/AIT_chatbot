@@ -4,23 +4,6 @@ use BotMan\BotMan\Middleware\ApiAi;
 
 $botman = resolve('botman');
 
-$dialogflow = ApiAi::create('9794b3192ae84387b8a34b535c1e1205')->listenForAction();
-
-//Apply global "received" middleware
-
-$botman->middleware->received($dialogflow);
-
-$botman->hears('.*', function ($bot) {
-
-	$extras = $bot->getMessage()->getExtras();
-	$apiReply = $extras['apiReply'];
-	$apiAction = $extras['apiAction'];
-	$apiIntent = $extras['apiIntent'];
-
-	$bot->reply($apiReply);
-
-})->middleware($dialogflow);
-
 /*
 $botman->hears('Hi|Hello|Hey', function ($bot) {
     $bot->reply('Hello there, I am a chatbot that offers few functionality for now');
@@ -28,6 +11,7 @@ $botman->hears('Hi|Hello|Hey', function ($bot) {
     	$bot->say('Welcome '.$name->getText());
     });
 });
+
 
 $botman->hears('How are you?|How you doing?|What\'s up', function ($bot) {
 	$bot->reply('I\'m good');
@@ -41,6 +25,7 @@ $botman->hears('How are you?|How you doing?|What\'s up', function ($bot) {
 		}
 	});
 });
+
 
 $botman->hears('Meaning of {dic}?', function ($bot, $dic) {
 	$bot->typesAndWaits(2);
@@ -75,6 +60,21 @@ $botman->hears('Google - {google}', function ($bot, $google) {
 });
 
 $botman->hears('/start', BotManController::class.'@startConversation');
-
-
 */
+
+$dialogflow = ApiAi::create('9794b3192ae84387b8a34b535c1e1205')->listenForAction();
+
+//Apply global "received" middleware
+
+$botman->middleware->received($dialogflow);
+
+$botman->hears('.*', function ($bot) {
+
+	$extras = $bot->getMessage()->getExtras();
+	$apiReply = $extras['apiReply'];
+	$apiAction = $extras['apiAction'];
+	$apiIntent = $extras['apiIntent'];
+
+	$bot->reply($apiReply);
+
+})->middleware($dialogflow);
