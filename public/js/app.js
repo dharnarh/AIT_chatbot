@@ -50332,6 +50332,6 @@ function scrollIntoView () {
   var last_element = c[c.length - 1];
   last_element.scrollIntoView(true);
 
-  }, 3000);
+}, 1000);
 
 }
