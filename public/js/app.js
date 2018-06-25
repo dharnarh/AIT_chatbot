@@ -49185,6 +49185,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                     var messages = response.data.messages || [];
                     messages.forEach(function (msg) {
                         _this2._addMessage(msg.text, msg.attachment, false, msg);
+
+                    scrollIntoView();
+
                     });
                     if (callback) {
                         callback(response.data);
@@ -50008,6 +50011,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "ChatInput",
     attrs: {
       "type": "text",
+      "id": "chatInput",
+      "onchange": "scrollIntoView()",
       "placeholder": "Enter your message here!"
     },
     domProps: {
@@ -50312,3 +50317,21 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ })
 /******/ ]);
+
+
+
+
+
+
+function scrollIntoView () {
+
+  setTimeout(function(){
+
+  /* Add srollIntoView() function to new messages */
+  var c = document.getElementsByClassName("ChatLog__entry");
+  var last_element = c[c.length - 1];
+  last_element.scrollIntoView(true);
+
+  }, 3000);
+
+}
