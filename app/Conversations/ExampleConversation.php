@@ -15,22 +15,30 @@ class ExampleConversation extends Conversation
      */
     public function askReason()
     {
-        $question = Question::create("What do you need?")
+        $question = Question::create("Would you like a dictionary search?")
             ->fallback('Unable to ask question')
             ->callbackId('ask_reason')
             ->addButtons([
-                Button::create('Give me a fancy quote')->value('quote'),
-                Button::create('Solve math')->value('maths'),
-                Button::create('Direction')->value('direction'),
-                Button::create('')->value(''),
+                Button::create('Yes')->value('Yes'),
+                Button::create('No')->value('No'),
             ]);
 
         return $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                if ($answer->getValue() === 'quote') {
+                if ($answer->getValue() === 'No') {
                     $this->say(Inspiring::quote());
                 } else {
-                    
+                    $this->ask('Enter a word you would like to search such as "Apple"', function ($answer, $bot) {
+                        $url = "http://api.pearson.com/v2/dictionaries/laad3/entries?headword={$answer}&limit=1";
+                        $data = file_get_contents($url);
+
+                        $lists = json_decode($data);
+
+                        $def = $lists->results[0]->senses[0]->definition;
+                        $exp = $lists->results[0]->senses[0]->examples[0]->text;
+                        $bot->say('Definition - ' .$def);
+                        $bot->say('Example - ' .$exp);
+                    });
                 }
             }
         });
